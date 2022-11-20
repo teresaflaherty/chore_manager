@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 @app.route("/chores", methods=["GET"])
 def get_all_chores():
+    db_connection = create_db_connection()
     get_chores_query = f"SELECT * FROM chores;"
     chores = read_query(db_connection, get_chores_query)
     return jsonify(chores)
@@ -15,6 +16,7 @@ def get_all_chores():
 
 @app.route("/chores/<chore_id>", methods=["GET"])
 def get_chore(chore_id):
+    db_connection = create_db_connection()
     get_chore_query = f"SELECT * FROM chores WHERE id = {chore_id};"
     chore = read_query(db_connection, get_chore_query)
     return jsonify(chore)
@@ -22,6 +24,7 @@ def get_chore(chore_id):
 
 @app.route("/chores/expired", methods=["GET"])
 def get_expired_chores():
+    db_connection = create_db_connection()
     get_expired_chores_query = f"SELECT * FROM chores WHERE time_remaining = 0;"
     chores = read_query(db_connection, get_expired_chores_query)
     return jsonify(chores)
@@ -29,6 +32,7 @@ def get_expired_chores():
 
 @app.route("/chores/expiring", methods=["GET"])
 def get_expiring_chores():
+    db_connection = create_db_connection()
     get_expired_chores_query = f"SELECT * FROM chores WHERE time_remaining = 1;"
     chores = read_query(db_connection, get_expired_chores_query)
     return jsonify(chores)
@@ -36,6 +40,7 @@ def get_expiring_chores():
 
 @app.route("/chores/<chore_id>", methods=["PATCH"])
 def reset_finished_chore(chore_id):
+    db_connection = create_db_connection()
     reset_query = f"UPDATE chores SET time_remaining = frequency WHERE id = {chore_id};"
     execute_query(db_connection, reset_query)
 
@@ -53,5 +58,4 @@ def reset_finished_chore(chore_id):
 
 
 if __name__ == "__main__":
-    db_connection = create_db_connection()
     app.run(host="0.0.0.0", port=8000)
