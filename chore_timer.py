@@ -26,12 +26,12 @@ def run_server():
 
 
 def decrement_chore_counter():
-    decrement_query = "UPDATE chores SET time_remaining = time_remaining - 1 WHERE time_remaining != 0;"
+    decrement_query = "UPDATE chores SET days_remaining = days_remaining - 1 WHERE days_remaining != 0;"
     execute_query(db_connection, decrement_query)
 
 
 def surface_expired_chores(time_of_day):
-    get_chores_query = f"SELECT * FROM chores WHERE reminder_time = '{time_of_day}' AND time_remaining = 0;"
+    get_chores_query = f"SELECT * FROM chores WHERE reminder_time = '{time_of_day}' AND days_remaining = 0;"
     relevant_chores = read_query(db_connection, get_chores_query)
 
     with open("chores_to_do.txt", 'w') as chore_file:

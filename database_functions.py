@@ -88,7 +88,7 @@ def setup_database():
       name VARCHAR(50) NOT NULL,
       frequency INT NOT NULL,
       reminder_time VARCHAR(20) NOT NULL,
-      time_remaining INT NOT NULL
+      days_remaining INT NOT NULL
       );
      """
 
