@@ -21,7 +21,7 @@ def get_chore(chore_id):
     db_connection = create_db_connection()
     get_chore_query = f"SELECT * FROM chores WHERE id = {chore_id};"
     chore = read_query(db_connection, get_chore_query)
-    resp = make_response(chore)  # here you could use make_response(render_template(...)) too
+    resp = make_response(chore)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
@@ -31,7 +31,7 @@ def get_expired_chores():
     db_connection = create_db_connection()
     get_expired_chores_query = f"SELECT * FROM chores WHERE time_remaining = 0;"
     chores = read_query(db_connection, get_expired_chores_query)
-    resp = make_response(chores)  # here you could use make_response(render_template(...)) too
+    resp = make_response(chores)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
@@ -41,7 +41,7 @@ def get_expiring_chores():
     db_connection = create_db_connection()
     get_expired_chores_query = f"SELECT * FROM chores WHERE time_remaining = 1;"
     chores = read_query(db_connection, get_expired_chores_query)
-    resp = make_response(chores)  # here you could use make_response(render_template(...)) too
+    resp = make_response(chores)
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
